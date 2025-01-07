@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<meta charset='utf-8'>
+<head>
+    <title></title>
+    <style>
+        #map {
+            position: absolute;
+            width: calc(100%);
+            height: calc(100%);
+            left: 0px;
+            top: 0px;
+        }
+        #interface {
+            display: block;
+            position: absolute;
+            z-index: 9;
+            background-color: #FFFFFF;
+            padding: 10px 10px 10px 15px;
+            border-radius: 5px;
+            font-size: 13px;
+            font-weight: bold;
+            opacity: 0.9;
+            margin: 8px;
+        }
+    </style>
+</head>
+<body>
+<div id='map'></div>
+
+<script src="https://cdn.xdworld.kr/latest/XDWorldEM.js"></script>
+
+<script src="src/config/config.js"></script>
+<script src="src/parser/coordinate.js"></script>
+<script src="src/block/block.js"></script>
+<script src="src/chunk/chunk.js"></script>
+<script src="src/world/world.js"></script>
+<script src="src/application.js"></script>
+</body>
+</html>
