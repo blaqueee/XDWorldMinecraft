@@ -25,6 +25,11 @@ class World {
     
                 if (!this.loadedChunks.has(chunkKey)) {
                     const newChunk = new Chunk(x, z, this.chunkSize, this.seed);
+
+                    if (this.spawn === null || this.spawn === undefined) {
+                        this.spawn = newChunk.blocks[0].getCorners()[0];
+                    }
+
                     newChunk.blocks.forEach((block) => {
                         var coordinates = block.getCorners();
                         var polygon = Module.createPolygon(`${block.x} - ${block.y} - ${block.z}`);
@@ -37,7 +42,7 @@ class World {
 
                         part.add(coordinates.length);
                         polygon.setPartCoordinates(vertex, part);
-                        polygon.setHeight(scaleFactorY);
+                        polygon.setHeight(blockSizeMeters);
                         
                         var polygonStyle = new Module.JSPolygonStyle();
                         polygonStyle.setFill(true);
