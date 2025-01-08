@@ -33,8 +33,7 @@ var Module = {
         var world = new World();
         world.updateWorld(100, 50);
 
-        var camera = Module.getViewCamera();
-        camera.setLocation(new Module.JSVector3D(-180,  90.00001619999998, 100));
+        var player = new Player(world.spawn);
 
     }
 };

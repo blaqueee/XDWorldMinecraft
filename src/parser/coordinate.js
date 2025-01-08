@@ -6,22 +6,34 @@ class Coordinate {
         this.z = z;
     }
 
-    getRealCoords() {
-        const [minLon, minLat, maxLon, maxLat] = bbox;
+    getSquareCoords() {
+        const metersPerLonDegreeAtEquator = metersPerLatDegree;
+        const metersPerLonDegree = (lat) => metersPerLonDegreeAtEquator * Math.cos((lat * Math.PI) / 180);
     
-        // Scale the x and z coordinates to the bounding box (min/max longitude and latitude)
-        const relX = this.x / scaleFactorX; // Adjust x based on longitude scale factor
-        const relZ = 1.0 - (this.z / scaleFactorZ); // Adjust z based on latitude scale factor, invert z if necessary
+        const baseLat = 0;
+        const baseLon = 0;
     
-        // Calculate longitude and latitude based on bounding box
-        const lon = minLon + relX * (maxLon - minLon); // Scale to longitude range
-        const lat = minLat + relZ * (maxLat - minLat); // Scale to latitude range
-        
-        // Calculate height based on y-coordinate and scale factor
-        const height = this.y * scaleFactorY + offsetY; // Apply scale and offset for height
+        const centerLonMeters = (this.x + 0.5) * blockSizeMeters;
+        const centerLatMeters = (this.z + 0.5) * blockSizeMeters;
     
-        return { latitude: lat, longitude: lon, height: height };
+        const centerLat = baseLat + (centerLatMeters / metersPerLatDegree);
+        const centerLon = baseLon + (centerLonMeters / metersPerLonDegree(baseLat));
+    
+        const cornerOffsets = [
+            { dLat: blockHalfSize, dLon: -blockHalfSize },
+            { dLat: blockHalfSize, dLon: blockHalfSize },
+            { dLat: -blockHalfSize, dLon: blockHalfSize },
+            { dLat: -blockHalfSize, dLon: -blockHalfSize }
+        ];
+    
+        const corners = cornerOffsets.map(({ dLat, dLon }) => {
+            const cornerLat = centerLat + (dLat / metersPerLatDegree);
+            const cornerLon = centerLon + (dLon / metersPerLonDegree(centerLat));
+            const height = this.y * blockSizeMeters + offsetY;
+            return { latitude: cornerLat, longitude: cornerLon, height };
+        });
+    
+        return corners;
     }
-    
 
 }

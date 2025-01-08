@@ -4,9 +4,9 @@ class Camera {
     }
 
     init(lon, lat, alt) {
-        this.camera.setTraceTarget(GLOBAL.TRACE_TARGET);
+        console.log(lon, lat, alt);
         this.camera.setTraceActive(true);
-        this.camera.setLocation(new Module.JSVector3D(lon, lat, alt));
+        this.camera.setLocation(new Module.JSVector3D(lon, lat, 1000));
     }
 
     move(position, tilt, direct, speed) {
