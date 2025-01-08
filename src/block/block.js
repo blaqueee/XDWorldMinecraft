@@ -10,48 +10,35 @@ class Block {
         }
     }
 
-    convertToRealCoords(x, y, z, bbox, scaleFactorX, scaleFactorZ, scaleFactorY) {
-        const [minLon, minLat, maxLon, maxLat] = bbox;
-    
-        const relX = x / scaleFactorX;
-        const relZ = 1.0 - (z / scaleFactorZ);
-
-        const lon = minLon + relX * (maxLon - minLon);
-        const lat = minLat + relZ * (maxLat - minLat);
-    
-        const relY = y / scaleFactorY;
-        const height = minHeight + relY * (maxHeight - minHeight);
-    
-        return { latitude: lat, longitude: lon, height: height };
+    convertToRealCoords(x, y, z) {
+        var coordinate = new Coordinate(x, y, z);
+        return coordinate.getRealCoords();
     }
-
+    
+    
+    
+    
     getCorners() {
-        const corners = [
-            this.convertToRealCoords(
-                this.coordinate.x - blockHalfSize, 
-                this.coordinate.y, 
-                this.coordinate.z - blockHalfSize, 
-                bbox, scaleFactorX, scaleFactorZ, scaleFactorY), // Bottom-left
-    
-            this.convertToRealCoords(
-                this.coordinate.x + blockHalfSize, 
-                this.coordinate.y, 
-                this.coordinate.z - blockHalfSize, 
-                bbox, scaleFactorX, scaleFactorZ, scaleFactorY), // Bottom-right
-    
-            this.convertToRealCoords(
-                this.coordinate.x + blockHalfSize, 
-                this.coordinate.y, 
-                this.coordinate.z + blockHalfSize, 
-                bbox, scaleFactorX, scaleFactorZ, scaleFactorY), // Top-right
-    
-            this.convertToRealCoords(
-                this.coordinate.x - blockHalfSize, 
-                this.coordinate.y, 
-                this.coordinate.z + blockHalfSize, 
-                bbox, scaleFactorX, scaleFactorZ, scaleFactorY) // Top-left
+        const offsets = [
+            [-blockHalfSize, -blockHalfSize], // Bottom-left
+            [blockHalfSize, -blockHalfSize],  // Bottom-right
+            [blockHalfSize, blockHalfSize],   // Top-right
+            [-blockHalfSize, blockHalfSize],  // Top-left
         ];
-
+    
+        const baseCoords = this.coordinate;
+    
+        // Compute corners based on offsets
+        const corners = offsets.map(([offsetX, offsetZ]) => {
+            const cornerX = baseCoords.x + offsetX / blockSizeMeters;
+            const cornerZ = baseCoords.z + offsetZ / blockSizeMeters;
+    
+            return this.convertToRealCoords(cornerX, baseCoords.y, cornerZ);
+        });
+    
+        console.log(corners);
         return corners;
     }
+    
+    
 }

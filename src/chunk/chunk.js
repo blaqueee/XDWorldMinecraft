@@ -16,10 +16,9 @@ class Chunk {
     generateBlocks() {
         for (let x = 0; x < this.chunkSize; x++) {
             for (let z = 0; z < this.chunkSize; z++) {
-                for (let y = 0; y < 256; y++) {
+                for (let y = 0; y < 20; y++) {
                     const blockType = this.getBlockType(x, y, z);
                     var block = new Block(x, y, z, blockType);
-                    console.log(block.getCorners());
                     this.blocks.push(block);
                 }
             }
