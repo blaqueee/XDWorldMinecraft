@@ -8,7 +8,7 @@ class Camera {
         this.camera.setTraceActive(true);
         this.camera.setLocation(new Module.JSVector3D(lon, lat, alt));
         this.camera.setTilt(10);
-        this.camera.setDirect(50);
+        this.camera.setDirect(0);
         this.camera.setFov(90);
     }
 

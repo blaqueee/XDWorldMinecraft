@@ -6,6 +6,6 @@ const offsetY = 0.0;
 
 const seed = -860899055;
 const chunkSize = 4;
-const renderDistance = 4;
+const renderDistance = 2;
 
 const metersPerLatDegree = 111_320;

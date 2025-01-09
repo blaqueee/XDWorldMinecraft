@@ -81,7 +81,9 @@ class World {
         }
     }
     
-    updateWorld(playerX, playerZ) {
+    updateWorld(player) {
+        var playerX = player.position.x;
+        var playerZ = player.position.z;
         this.loadChunk(playerX, playerZ);
         this.unloadChunk(playerX, playerZ);
     }

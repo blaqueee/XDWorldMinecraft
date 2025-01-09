@@ -30,10 +30,10 @@ var Module = {
             defaultKey : "DFG~EpIREQDmdJe1E9QpdBca#FBSDJFmdzHoe(fB4!e1E(JS1I=="
         });
 
-        var world = new World();
-        world.updateWorld(0, 0);
+        var player = new Player(new Coordinate(0, 0, 0));
 
-        var player = new Player(world.spawn);
+        var world = new World();
+        world.updateWorld(player);
 
     }
 };
