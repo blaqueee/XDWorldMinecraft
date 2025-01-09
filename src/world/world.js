@@ -19,8 +19,8 @@ class World {
         const startChunkZ = chunkZ - this.renderDistance;
         const endChunkZ = chunkZ + this.renderDistance;
     
-        for (let x = startChunkX; x <= endChunkX; x += this.chunkSize) {
-            for (let z = startChunkZ; z <= endChunkZ; z += this.chunkSize) {
+        for (let x = startChunkX; x <= endChunkX; x++) {
+            for (let z = startChunkZ; z <= endChunkZ; z++) {
                 const chunkKey = `${x},${z}`;
     
                 if (!this.loadedChunks.has(chunkKey)) {
