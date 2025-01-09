@@ -36,4 +36,21 @@ class Coordinate {
         return corners;
     }
 
+
+    getCenter() {
+        const metersPerLonDegreeAtEquator = metersPerLatDegree;
+        const metersPerLonDegree = (lat) => metersPerLonDegreeAtEquator * Math.cos((lat * Math.PI) / 180);
+    
+        const baseLat = 0;
+        const baseLon = 0;
+    
+        const centerLonMeters = (this.x + 0.5) * blockSizeMeters;
+        const centerLatMeters = (this.z + 0.5) * blockSizeMeters;
+    
+        const centerLat = baseLat + (centerLatMeters / metersPerLatDegree);
+        const centerLon = baseLon + (centerLonMeters / metersPerLonDegree(baseLat));
+        const height = this.y * blockSizeMeters + offsetY;
+    
+        return { latitude: centerLat, longitude: centerLon, height: height };
+    }
 }

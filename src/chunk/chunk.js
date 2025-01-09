@@ -15,8 +15,11 @@ class Chunk {
     
 
     generateBlocks() {
-        for (let x = this.chunkX; x < (this.chunkX + this.chunkSize); x++) {
-            for (let z = this.chunkZ; z < (this.chunkZ + this.chunkSize); z++) {
+        const startX = this.chunkX * this.chunkSize;
+        const startZ = this.chunkZ * this.chunkSize;
+
+        for (let x = startX; x < (startX + this.chunkSize); x++) {
+            for (let z = startZ; z < (startZ + this.chunkSize); z++) {
                 for (let y = 0; y < maxHeight; y++) {
                     const blockType = this.getBlockType(x, y, z);
                     if (blockType === 'air') continue;
