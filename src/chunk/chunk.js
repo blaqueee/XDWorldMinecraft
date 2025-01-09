@@ -15,8 +15,8 @@ class Chunk {
     
 
     generateBlocks() {
-        for (let x = 0; x < this.chunkSize; x++) {
-            for (let z = 0; z < this.chunkSize; z++) {
+        for (let x = this.chunkX; x < (this.chunkX + this.chunkSize); x++) {
+            for (let z = this.chunkZ; z < (this.chunkZ + this.chunkSize); z++) {
                 for (let y = 0; y < maxHeight; y++) {
                     const blockType = this.getBlockType(x, y, z);
                     if (blockType === 'air') continue;
@@ -34,11 +34,11 @@ class Chunk {
         const dirtHeight = 16 + noise * 2;
     
         if (y < stoneHeight) {
-            return "stone";
+            return 'stone';
         } else if (y < dirtHeight) {
-            return "dirt";
+            return 'dirt';
         } else {
-            return "air";
+            return 'air';
         }
     }
     

@@ -46,7 +46,13 @@ class World {
                         
                         var polygonStyle = new Module.JSPolygonStyle();
                         polygonStyle.setFill(true);
-                        polygonStyle.setFillColor(new Module.JSColor(255, 0, 0));
+
+                        if (block.type === 'stone') {
+                            polygonStyle.setFillColor(new Module.JSColor(89, 89, 90));
+                        } else if (block.type === 'dirt') {
+                            polygonStyle.setFillColor(new Module.JSColor(0, 165, 0));
+                        }
+
                         polygon.setStyle(polygonStyle);
 
                         this.layer.addObject(polygon, 0);
