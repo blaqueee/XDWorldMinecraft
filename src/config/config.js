@@ -4,8 +4,8 @@ const blockSizeMeters = 10;
 const blockHalfSize = blockSizeMeters / 2;
 const offsetY = 0.0;
 
-const seed = 12345;
-const chunkSize = 2;
+const seed = -860899055;
+const chunkSize = 8;
 const renderDistance = 4;
 
 const metersPerLatDegree = 111_320;

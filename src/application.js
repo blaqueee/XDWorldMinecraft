@@ -31,7 +31,7 @@ var Module = {
         });
 
         var world = new World();
-        world.updateWorld(100, 50);
+        world.updateWorld(0, 0);
 
         var player = new Player(world.spawn);
 
