@@ -53,4 +53,21 @@ class Coordinate {
     
         return { latitude: centerLat, longitude: centerLon, height: height };
     }
+
+    static fromRealCoords(latitude, longitude, height) {
+        const metersPerLonDegreeAtEquator = metersPerLatDegree;
+        const metersPerLonDegree = (lat) => metersPerLonDegreeAtEquator * Math.cos((lat * Math.PI) / 180);
+
+        const baseLat = 0;
+        const baseLon = 0;
+
+        const centerLatMeters = (latitude - baseLat) * metersPerLatDegree;
+        const centerLonMeters = (longitude - baseLon) * metersPerLonDegree(latitude);
+
+        const x = Math.floor(centerLonMeters / blockSizeMeters - 0.5);
+        const z = Math.floor(centerLatMeters / blockSizeMeters - 0.5);
+        const y = Math.floor((height - offsetY) / blockSizeMeters);
+
+        return new Coordinate(x, y, z);
+    }
 }
