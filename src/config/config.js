@@ -9,3 +9,4 @@ const chunkSize = 4;
 const renderDistance = 2;
 
 const metersPerLatDegree = 111_320;
+const playerSpeed = 0.8;

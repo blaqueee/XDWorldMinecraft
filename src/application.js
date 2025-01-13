@@ -31,9 +31,5 @@ var Module = {
         });
 
         var player = new Player(new Coordinate(0, 0, 0));
-
-        var world = new World();
-        world.updateWorld(player);
-
     }
 };
