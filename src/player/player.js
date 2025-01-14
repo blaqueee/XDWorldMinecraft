@@ -5,23 +5,20 @@ class Player {
         var spawn = coordinate.getCenter();
         this.camera.init(spawn.longitude, spawn.latitude, maxHeight * blockSizeMeters);
         this.world = new World();
+        this.world.updateWorld(this);
         this.setKeyboardMoveEvent();
     }
 
     setKeyboardMoveEvent() {
         document.addEventListener('keydown', function(event) {
             const key = event.key.toLowerCase();
-            console.log('keydown ', key);
             KEYBOARD_PRESS[key] = true;
         });
     
         document.addEventListener('keyup', function(event) {
             const key = event.key.toLowerCase();
-            console.log('keyup ', key);
             KEYBOARD_PRESS[key] = false;
         });
-
-        this.world.updateWorld(this);
     
         setInterval(() => this.renewPlayerMoving(), 20);
     }
