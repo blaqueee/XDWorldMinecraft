@@ -4,8 +4,8 @@ class Player {
         this.position = coordinate;
         var spawn = coordinate.getCenter();
         this.camera.init(spawn.longitude, spawn.latitude, maxHeight * blockSizeMeters);
-        this.setKeyboardMoveEvent();
         this.world = new World();
+        this.setKeyboardMoveEvent();
     }
 
     setKeyboardMoveEvent() {
@@ -20,6 +20,8 @@ class Player {
             console.log('keyup ', key);
             KEYBOARD_PRESS[key] = false;
         });
+
+        this.world.updateWorld(this);
     
         setInterval(() => this.renewPlayerMoving(), 20);
     }

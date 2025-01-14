@@ -6,7 +6,6 @@ var Module = {
     },
     postRun: function() {
 
-        // Call engine initialization API(essential)
         Module.initialize({
             container: document.getElementById("map"),
             terrain : {
